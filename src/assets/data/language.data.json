@@ -1,0 +1,32 @@
+[
+	{
+        "langName": "Português",
+        "langId": "pt",
+        "icon": "pt",
+        "lang": "Pt"
+    },
+    {
+        "langName": "English",
+        "langId": "en",
+        "icon": "us",
+        "lang": "En"
+    },
+    {
+        "langName": "Chinese",
+        "langId": "zh",
+        "icon": "cn",
+        "lang": "Ch"
+    },
+    {
+        "langName": "French",
+        "langId": "fr",
+        "icon": "fr",
+        "lang": "Fr"
+    },
+    {
+        "langName": "Japanese",
+        "langId": "ja",
+        "icon": "jp",
+        "lang": "Jp"
+    }
+]
