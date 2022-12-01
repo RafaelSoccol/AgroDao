@@ -5,6 +5,10 @@ import { setIsLoading } from 'redux/actions/Gui';
 import {Button, Col, DatePicker, Form, Input, InputNumber, PageHeader, Row} from "antd";
 import {APP_PREFIX_PATH} from "../../../configs/AppConfig";
 import {useHistory} from "react-router-dom";
+import {ethers} from "ethers";
+import Agrodao from "../../../artifacts/contracts/Agrodao.sol/Agrodao.json";
+
+const agroDaoAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const Cadastro = (props) => {
     const { setIsLoading, isLoading } = props;
@@ -24,9 +28,30 @@ const Cadastro = (props) => {
         testarLoading();
     }, []);
 
+    const requestAccount = async () => {
+        await window.ethereum.request( {method: 'eth_requestAccounts'} );
+    }
+
+    const createProduct = async (json) => {
+        if (!json) return;
+
+        if (typeof window.ethereum !== 'undefined') {
+            await requestAccount();
+
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+
+            const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, signer)
+            const transaction = await contract.createProduct(message);
+            // setMessage("");
+            await transaction.wait();
+        }
+    }
+
     const onFinish = async (values) => {
-        
-        history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
+        createProduct(values)
+        console.log(values)
+       // history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
     };
     
     return (
@@ -67,7 +92,7 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Data de nascimento"
-                                    name="nome"
+                                    name="data_nascimento"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <DatePicker style={{width:"100%"}}/>
                                 </Form.Item>
@@ -75,7 +100,7 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Peso atual (kg)"
-                                    name="nome_cientifico">
+                                    name="peso_atual">
                                     <InputNumber style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
@@ -85,7 +110,7 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Local onde o bovino esta"
-                                    name="nome"
+                                    name="teste1"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
@@ -93,7 +118,7 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Observação"
-                                    name="nome_cientifico">
+                                    name="teste2">
                                     <Input/>
                                 </Form.Item>
                             </Col>
