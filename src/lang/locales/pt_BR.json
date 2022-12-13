@@ -1,8 +1,8 @@
 {
 	"home": "Home",
-	"cadastro": "Cadastro",
-	"edicao": "Edição",
-	"historico": "Histórico",
+	"cadastro": "Registration",
+	"edicao": "Edition",
+	"historico": "Historic",
 	
 	"sidenav.dashboard": "Dashboard",
 	"sidenav.dashboard.default": "Default",

@@ -63,13 +63,13 @@ return ("user does not own product", products[product_id].owner.id, users[owner_
 // user functions
 
 function createUser(uint id, string calldata mail, string calldata password) public returns(string memory) {
-if (!users[id].exists) {
-User memory user = User(id, mail, password, true);
-users[id] = user;
-return "user created successfully";
-} else {
-return "user does not exist";
-}
+    if (!users[id].exists) {
+        User memory user = User(id, mail, password, true);
+        users[id] = user;
+        return "user created successfully";
+    } else {
+        return "user does not exist";
+    }
 }
 
 // function deleteUser()

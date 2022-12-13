@@ -55,13 +55,13 @@ const VisualizarHistorico = (props) => {
                     marginTop: -25,
                 }}
                 onBack={() => history.push(`${APP_PREFIX_PATH}/historico`)}
-                title={"Visualizar informações"}
+                title={"View information"}
             />
             <div className="code-box" style={{marginTop: 15, padding:30}}>
                 <Row style={{marginTop: 5}} gutter={30}>
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Nome</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Name</span>
                         </div>
                         <div>
                             <span>{dadosById?.nome ?? 'Não cadastrado'}</span>
@@ -70,7 +70,7 @@ const VisualizarHistorico = (props) => {
 
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Número do brinco</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Earring Number</span>
                         </div>
                         <div style={{marginTop: 5, textAlign: 'justify'}}>
                             <span style={{}}>{dadosById?.numero_brinco ?? 'Não cadastrada'}</span>
@@ -81,7 +81,7 @@ const VisualizarHistorico = (props) => {
                 <Row style={{marginTop: 35}} gutter={30}>
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Data nascimento</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Birth date</span>
                         </div>
                         <div>
                             <span>{dadosById?.data_nascimento ?? 'Não cadastrado'}</span>
@@ -90,7 +90,7 @@ const VisualizarHistorico = (props) => {
 
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Data de abate</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Slaughter date</span>
                         </div>
                         <div style={{marginTop: 5, textAlign: 'justify'}}>
                             <span style={{}}>{dadosById?.data_abate ?? 'Não cadastrada'}</span>
@@ -101,7 +101,7 @@ const VisualizarHistorico = (props) => {
                 <Row style={{marginTop: 35}} gutter={30}>
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Local de origem</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Farm of origin</span>
                         </div>
                         <div>
                             <span>{dadosById?.local_origem ?? 'Não cadastrado'}</span>
@@ -110,7 +110,7 @@ const VisualizarHistorico = (props) => {
 
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Observações</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Observation</span>
                         </div>
                         <div style={{marginTop: 5, textAlign: 'justify'}}>
                             <span style={{}}>{dadosById?.observacoes ?? 'Não cadastrada'}</span>
@@ -121,7 +121,7 @@ const VisualizarHistorico = (props) => {
                 <Row style={{marginTop: 35}} gutter={30}>
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Primeiro peso cadastrado</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>First registered weight</span>
                         </div>
                         <div>
                             <span>275 kg</span>
@@ -130,7 +130,7 @@ const VisualizarHistorico = (props) => {
 
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Último peso cadastrado</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Last registered weight</span>
                         </div>
                         <div style={{marginTop: 5, textAlign: 'justify'}}>
                             <span>475 kg</span>
@@ -141,7 +141,7 @@ const VisualizarHistorico = (props) => {
                 <Row style={{marginTop: 35}} gutter={30}>
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>A fazenda em que o animal viveu toma medidas sustentáveis?</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Does the farm where the animal lived take sustainable measures?</span>
                         </div>
                         <div>
                             <span>{dadosById.sustentavel ? "Sim" : "Não"}</span>

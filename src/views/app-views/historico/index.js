@@ -39,7 +39,7 @@ const Historico = (props) => {
                     marginRight: -25,
                     marginTop: -25,
                 }}
-                title={"Visualizar o histórico do animal"}
+                title={"View the animal's history"}
             />
             <div className="code-box" style={{marginTop:15}}>
                 <div style={{ padding: 25, backgroundImage: `url(/img/fundoInicial.png)`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', height:350, borderTopRightRadius: 12, borderTopLeftRadius: 12}}/>
@@ -49,7 +49,7 @@ const Historico = (props) => {
                             <Row gutter={16}>
                                 <Col xs={24} md={24}>
                                     <Form.Item
-                                        label="Brinco do bovino"
+                                        label="Earring Number"
                                         rules={[{required: true, message: 'Esse campo é obrigatório'}]}
                                         name="id">
                                         <InputNumber style={{width:"100%"}}/>

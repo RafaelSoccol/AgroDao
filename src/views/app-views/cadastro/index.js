@@ -42,7 +42,7 @@ const Cadastro = (props) => {
             const signer = provider.getSigner();
 
             const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, signer)
-            const transaction = await contract.createProduct(message);
+            const transaction = await contract.createProduct("teste");
             // setMessage("");
             await transaction.wait();
         }
@@ -64,7 +64,7 @@ const Cadastro = (props) => {
                     marginRight: -25,
                     marginTop: -25,
                 }}
-                title={"Cadastro de um novo Bovino"}
+                title={"Registration of a new Bovine"}
             />
             <div className="code-box" style={{marginTop: 15}}>
                 <section className="code-box-demo">
@@ -73,14 +73,14 @@ const Cadastro = (props) => {
                         <Row gutter={16}>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Nome"
+                                    label="Name"
                                     name="nome">
                                     <Input/>
                                 </Form.Item>
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Número do brinco"
+                                    label="Earring Number"
                                     name="nome_cientifico"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
@@ -91,7 +91,7 @@ const Cadastro = (props) => {
                         <Row gutter={16}>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Data de nascimento"
+                                    label="Birth date"
                                     name="data_nascimento"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <DatePicker style={{width:"100%"}}/>
@@ -99,7 +99,7 @@ const Cadastro = (props) => {
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Peso atual (kg)"
+                                    label="Current weight (kg)"
                                     name="peso_atual">
                                     <InputNumber style={{width:"100%"}}/>
                                 </Form.Item>
@@ -109,7 +109,7 @@ const Cadastro = (props) => {
                         <Row gutter={16}>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Local onde o bovino esta"
+                                    label="Where the bovine is?"
                                     name="teste1"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
@@ -117,7 +117,7 @@ const Cadastro = (props) => {
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Observação"
+                                    label="Observation"
                                     name="teste2">
                                     <Input/>
                                 </Form.Item>
@@ -127,7 +127,7 @@ const Cadastro = (props) => {
 
                         <Form.Item style={{alignItems: 'flex-end'}}>
                             <Button type="primary" htmlType="submit" >
-                                Cadastrar
+                                Register
                             </Button>
                         </Form.Item>
                     </Form>

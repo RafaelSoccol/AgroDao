@@ -42,7 +42,7 @@ const Editar = (props) => {
                     marginTop: -25,
                 }}
                 onBack={() => history.push(`${APP_PREFIX_PATH}/edicao`)}
-                title={"Adicionar informações ao bovino"}
+                title={"Add information to bovine"}
             />
             <div className="code-box" style={{marginTop: 15}}>
                 <section className="code-box-demo">
@@ -51,7 +51,7 @@ const Editar = (props) => {
                         <Row gutter={16}>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Local onde o bovino esta"
+                                    label="Where the bovine is?"
                                     name="nome_cientifico"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
@@ -59,7 +59,7 @@ const Editar = (props) => {
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Peso atual"
+                                    label="Current weight (kg)"
                                     name="nome_cientifico"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
@@ -70,7 +70,7 @@ const Editar = (props) => {
                         <Row gutter={16}>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Observações"
+                                    label="Observation"
                                     name="nome_cientifico"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <DatePicker style={{width:"100%"}}/>
@@ -78,7 +78,7 @@ const Editar = (props) => {
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Data de abate"
+                                    label="Date of slaughter"
                                     name="nome_cientifico"
                                     rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
                                     <DatePicker style={{width:"100%"}}/>
@@ -89,7 +89,7 @@ const Editar = (props) => {
 
                         <Form.Item style={{alignItems: 'flex-end'}}>
                             <Button type="primary" htmlType="submit" >
-                                Adicionar informações
+                                Add informations
                             </Button>
                         </Form.Item>
                     </Form>

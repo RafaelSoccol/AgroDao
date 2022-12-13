@@ -5,7 +5,6 @@ async function main() {
   const agrodao = await Agrodao.deploy();
 
   await agrodao.deployed();
-
   console.log(
       "Agrodao deployed to:", agrodao.address
   );

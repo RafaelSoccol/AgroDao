@@ -2,7 +2,7 @@ import Loading from 'components/atom/Loading'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { setIsLoading } from 'redux/actions/Gui';
-import {Button, PageHeader} from "antd";
+import {Button, Input, PageHeader} from "antd";
 import { ethers } from 'ethers';
 import Agrodao from "../../../artifacts/contracts/Agrodao.sol/Agrodao.json";
 
@@ -21,6 +21,27 @@ const Home = (props) => {
 		// Demonstrando como o loading funciona
 		testarLoading();
 	}, []);
+	
+	async function createUsers() {
+		if (typeof window.ethereum !== "undefined") {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			
+			const contract = new ethers.Contract(greetAddress, Agrodao.abi, signer)
+			
+			try {
+				
+			 	let usuario1 = await  contract.createUser(123, "dscds", "dcsdc");
+				
+				let usuario2 = await  contract.createUser(321, "bnbjhb", "xsdxxd");
+
+				debugger
+				console.log("users: ", usuario1, usuario2);
+			} catch (error) {
+				console.log("Error: ", error);
+			}
+		}
+	}
 
 
 	const [message, setMessage] = useState("teste");
@@ -33,7 +54,6 @@ const Home = (props) => {
 		if (typeof window.ethereum !== "undefined") {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			const contract = new ethers.Contract(greetAddress, Agrodao.abi, provider)
-
 			try {
 				const data = await contract.greet();
 				console.log("data: ", data);
@@ -74,28 +94,35 @@ const Home = (props) => {
 			/>
 			<div  style={{marginTop: 15}}>
 				<div style={{marginTop: 20}}>
-					<span style={{fontSize: 50, fontWeight: 600, marginLeft: 10, color: '#1d5207', marginTop:10}}>Bem-vindx à Agrodao 🌿</span>
+					<span style={{fontSize: 50, fontWeight: 600, marginLeft: 10, color: '#1d5207', marginTop:10}}>Welcome to Agrodao 🌿</span>
 				</div>
 				
 				<div style={{display:'flex', justifyContent:'center', marginTop: -90}}>
 					<img style={{width: 500 }} src={'/img/agrodaoEscrita.png'} alt={`logo`}/>
 				</div>
 				<div style={{display:'flex', justifyContent:'center', marginTop:-150, }}>
-					<span style={{color:'#1d5207', width:700, fontSize: 20, fontWeight:700,  textAlign: "center"}}>Nós lutamos contra as mudanças climáticas e desmatamento no Brasil através da transparência na indústria alimentícia. Coma de forma mais segura, ajude a salvar o planeta.</span>
+					<span style={{color:'#1d5207', width:700, fontSize: 20, fontWeight:700,  textAlign: "center"}}>Agrodao fights climate change and deforestation through food transparency. Eat safer, save the world.</span>
 				</div>
 				<div>
+					<Button onClick={createUsers}>
+						Create users
+					</Button>
+					
 					<Button onClick={fetchGreeting}>
 						Fetch greet
 					</Button>
-
-					<Button onClick={setGreeting}>
+					
+					<Button onClick={setGreeting} style={{marginLeft: 10}}>
 						Set greet
 					</Button>
-					<input
+				</div>
+				<div>
+					<Input
+						style={{marginTop: 10, width:220}}
 						placeholder="set lock message"
 						onChange={(e) => setMessage(e.target.value)}
 						value={message}>
-					</input>
+					</Input>
 				</div>
 			</div>
 		</Loading>
