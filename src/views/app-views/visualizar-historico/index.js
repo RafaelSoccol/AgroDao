@@ -27,30 +27,23 @@ const VisualizarHistorico = (props) => {
         if (typeof window.ethereum !== "undefined") {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, provider);
-            const prod = await contract.products(id);
-            console.log("product: ", prod);
-            let teste = prod.map( a => String(a))  
+            const prod = await contract.products(Number(id));
+            let teste = prod.map( a => String(a))
             debugger
+            setDadosById({
+                nome: teste[2],
+                numero_brinco: teste[0],
+                data_nascimento: teste[4],
+                pesos: teste[3],
+                local_origem: teste[5],
+                observacao: teste[6],
+                sustentavel: true,
+            })
         }
     }
 
     const setarDadosById = () => {
-
         getProduct(id);
-        
-        // let dados = await consultorService.getById(id);
-        
-        let dados = {
-            nome: "Teste",
-            numero_brinco: 12436,
-            data_nascimento: "13/04/2020",
-            pesos: [279, 323, 432],
-            local_origem: "Fazenda São João",
-            observacao: "Teste teste teste teste",
-            data_abate: "17/11/2022",
-            sustentavel: true,
-        }
-        setDadosById(dados);
     };
 
     useEffect(() => {
@@ -102,19 +95,19 @@ const VisualizarHistorico = (props) => {
                 <Row style={{marginTop: 35}} gutter={30}>
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Birth date</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Age (month)</span>
                         </div>
                         <div>
-                            <span>{dadosById?.data_nascimento ?? 'Não cadastrado'}</span>
+                            <span>{dadosById?.data_nascimento ?? 'Não cadastrado'} months</span>
                         </div>
                     </Col>
 
                     <Col xs={24} md={12}>
                         <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Slaughter date</span>
+                            <span style={{ fontSize: 17, fontWeight:"bold",}}>First registered weight</span>
                         </div>
-                        <div style={{marginTop: 5, textAlign: 'justify'}}>
-                            <span style={{}}>{dadosById?.data_abate ?? 'Não cadastrada'}</span>
+                        <div>
+                            <span>{dadosById?.pesos} kg</span>
                         </div>
                     </Col>
                 </Row>
@@ -134,27 +127,7 @@ const VisualizarHistorico = (props) => {
                             <span style={{ fontSize: 17, fontWeight:"bold",}}>Observation</span>
                         </div>
                         <div style={{marginTop: 5, textAlign: 'justify'}}>
-                            <span style={{}}>{dadosById?.observacoes ?? 'Não cadastrada'}</span>
-                        </div>
-                    </Col>
-                </Row>
-
-                <Row style={{marginTop: 35}} gutter={30}>
-                    <Col xs={24} md={12}>
-                        <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>First registered weight</span>
-                        </div>
-                        <div>
-                            <span>275 kg</span>
-                        </div>
-                    </Col>
-
-                    <Col xs={24} md={12}>
-                        <div>
-                            <span style={{ fontSize: 17, fontWeight:"bold",}}>Last registered weight</span>
-                        </div>
-                        <div style={{marginTop: 5, textAlign: 'justify'}}>
-                            <span>475 kg</span>
+                            <span style={{}}>{dadosById?.observacao ?? 'Não cadastrada'}</span>
                         </div>
                     </Col>
                 </Row>

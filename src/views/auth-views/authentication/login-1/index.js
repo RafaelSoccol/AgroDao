@@ -19,7 +19,7 @@ const LoginOne = props => {
 						<Card style={{backgroundColor:"#f5fcf5"}}>
 							<div className="my-4">
 								<div className="text-center">
-									<img className="img-fluid" style={{width:250}} src={`/img/agro.png`} alt="" />
+									<img className="img-fluid" style={{width:250}} src={`/img/agrodao.png`} alt="" />
 									<p>Don't have an account yet? <a href="/auth/register-1">Sign Up</a></p>
 								</div>
 								<Row justify="center">

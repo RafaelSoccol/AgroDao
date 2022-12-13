@@ -57,7 +57,7 @@ const Cadastro = (props) => {
             const signer = provider.getSigner();
 
             const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, signer)
-            const transaction = await contract.createProductTeste(123, "nome teste", 23, 150);
+            const transaction = await contract.createProductTeste(123, json.name, json.weight, json.birth, json.location, json.observation);
             // setMessage("");
             await transaction.wait();
 
@@ -66,16 +66,9 @@ const Cadastro = (props) => {
     }
 
     const onFinish = async (values) => {
-        values.name = "boi 1"
-        values.earning_number = 234
-        values.birth = "17/09/2021"
-        values.weight = 150
-        values.location = "fazenda teste"
-        values.observation = "observação teste"
-        
-        createProduct(values)
-       // console.log(values)
-       // history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
+       await createProduct(values)
+       await console.log(values)
+       await history.push(`${APP_PREFIX_PATH}/home`) ;
     };
     
     return (
@@ -98,14 +91,14 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Name"
-                                    name="nome">
+                                    name="name">
                                     <Input/>
                                 </Form.Item>
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Earring Number"
-                                    name="nome_cientifico"
+                                    name="earning_number"
                                     rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
@@ -115,16 +108,16 @@ const Cadastro = (props) => {
                         <Row gutter={16}>
                             <Col xs={24} md={12}>
                                 <Form.Item
-                                    label="Birth date"
-                                    name="data_nascimento"
+                                    label="Age (month)"
+                                    name="birth"
                                     rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
-                                    <DatePicker style={{width:"100%"}}/>
+                                    <InputNumber style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Current weight (kg)"
-                                    name="peso_atual">
+                                    name="weight">
                                     <InputNumber style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
@@ -134,7 +127,7 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Where the bovine is?"
-                                    name="teste1"
+                                    name="location"
                                     rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
@@ -142,7 +135,7 @@ const Cadastro = (props) => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Observation"
-                                    name="teste2">
+                                    name="observation">
                                     <Input/>
                                 </Form.Item>
                             </Col>

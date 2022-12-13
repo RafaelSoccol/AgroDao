@@ -37,7 +37,7 @@ const Editar = (props) => {
     const onFinish = async (values) => {
         // values.usuario_fonte
         // values.usuario_recebe
-        // values.boi_id
+        values.boi_id = id
         if (typeof window.ethereum !== "undefined") {
             await requestAccount();
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -52,7 +52,7 @@ const Editar = (props) => {
                 console.log("Error: ", error);
             }
         }
-       // history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
+       history.push(`${APP_PREFIX_PATH}/home`) ;
     };
     
    const getProduct = async (id) => {
@@ -75,49 +75,49 @@ const Editar = (props) => {
                     marginTop: -25,
                 }}
                 onBack={() => history.push(`${APP_PREFIX_PATH}/edicao`)}
-                title={"Add information to bovine"}
+                title={"Transfer the bovine"}
             />
             <div className="code-box" style={{marginTop: 15}}>
                 <section className="code-box-demo">
                     <Form form={form} labelCol={{span: 8}} wrapperCol={{span: 24}} layout={'vertical'} onFinish={onFinish}>
                         
-                        <Row gutter={16}>
-                            <Col xs={24} md={12}>
-                                <Form.Item
-                                    label="Where the bovine is?"
-                                    name="nome_cientifico"
-                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
-                                    <Input/>
-                                </Form.Item>
-                            </Col>
-                            <Col xs={24} md={12}>
-                                <Form.Item
-                                    label="Current weight (kg)"
-                                    name="nome_cientifico"
-                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
-                                    <Input/>
-                                </Form.Item>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={16}>
-                            <Col xs={24} md={12}>
-                                <Form.Item
-                                    label="Observation"
-                                    name="nome_cientifico"
-                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
-                                    <Input style={{width:"100%"}}/>
-                                </Form.Item>
-                            </Col>
-                            <Col xs={24} md={12}>
-                                <Form.Item
-                                    label="Date of slaughter"
-                                    name="nome_cientifico"
-                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
-                                    <DatePicker style={{width:"100%"}}/>
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                        {/*<Row gutter={16}>*/}
+                        {/*    <Col xs={24} md={12}>*/}
+                        {/*        <Form.Item*/}
+                        {/*            label="Where the bovine is?"*/}
+                        {/*            name="nome_cientifico"*/}
+                        {/*            rules={[{required: false, message: 'Esse campo é obrigatório'}]}>*/}
+                        {/*            <Input/>*/}
+                        {/*        </Form.Item>*/}
+                        {/*    </Col>*/}
+                        {/*    <Col xs={24} md={12}>*/}
+                        {/*        <Form.Item*/}
+                        {/*            label="Current weight (kg)"*/}
+                        {/*            name="nome_cientifico"*/}
+                        {/*            rules={[{required: false, message: 'Esse campo é obrigatório'}]}>*/}
+                        {/*            <Input/>*/}
+                        {/*        </Form.Item>*/}
+                        {/*    </Col>*/}
+                        {/*</Row>*/}
+                        
+                        {/*<Row gutter={16}>*/}
+                        {/*    <Col xs={24} md={12}>*/}
+                        {/*        <Form.Item*/}
+                        {/*            label="Observation"*/}
+                        {/*            name="nome_cientifico"*/}
+                        {/*            rules={[{required: false, message: 'Esse campo é obrigatório'}]}>*/}
+                        {/*            <Input style={{width:"100%"}}/>*/}
+                        {/*        </Form.Item>*/}
+                        {/*    </Col>*/}
+                        {/*    <Col xs={24} md={12}>*/}
+                        {/*        <Form.Item*/}
+                        {/*            label="Date of slaughter"*/}
+                        {/*            name="nome_cientifico"*/}
+                        {/*            rules={[{required: false, message: 'Esse campo é obrigatório'}]}>*/}
+                        {/*            <DatePicker style={{width:"100%"}}/>*/}
+                        {/*        </Form.Item>*/}
+                        {/*    </Col>*/}
+                        {/*</Row>*/}
                         
                         <Divider/>
 
@@ -138,14 +138,14 @@ const Editar = (props) => {
                                     <InputNumber style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
-                            <Col xs={24} md={8}>
-                                <Form.Item
-                                    label="Boi"
-                                    name="boi_id"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
-                                    <InputNumber style={{width:"100%"}}/>
-                                </Form.Item>
-                            </Col>
+                            {/*<Col xs={24} md={8}>*/}
+                            {/*    <Form.Item*/}
+                            {/*        label="Boi"*/}
+                            {/*        name="boi_id"*/}
+                            {/*        rules={[{required: true, message: 'Esse campo é obrigatório'}]}>*/}
+                            {/*        <InputNumber style={{width:"100%"}}/>*/}
+                            {/*    </Form.Item>*/}
+                            {/*</Col>*/}
                         </Row>
 
 

@@ -80,47 +80,21 @@ const Home = (props) => {
 
 	return (
 		<Loading isLoading={isLoading}>
-			<PageHeader
-				style={{
-					borderBottom: '1px solid rgb(235, 237, 240)',
-					background: 'white',
-					marginLeft: -25,
-					marginRight: -25,
-					marginTop: -25,
-				}}
-				title={"Home"}
-			/>
 			<div  style={{marginTop: 15}}>
 				<div style={{marginTop: 20}}>
 					<span style={{fontSize: 50, fontWeight: 600, marginLeft: 10, color: '#1d5207', marginTop:10}}>Welcome to Agrodao 🌿</span>
 				</div>
 				
-				<div style={{display:'flex', justifyContent:'center', marginTop: -90}}>
-					<img style={{width: 500 }} src={'/img/agrodaoEscrita.png'} alt={`logo`}/>
+				<div style={{display:'flex', justifyContent:'center', marginTop: -50}}>
+					<img style={{width: 500 }} src={'/img/agrodao.png'} alt={`logo`}/>
 				</div>
-				<div style={{display:'flex', justifyContent:'center', marginTop:-150, }}>
-					<span style={{color:'#1d5207', width:700, fontSize: 20, fontWeight:700,  textAlign: "center"}}>Agrodao fights climate change and deforestation through food transparency. Eat safer, save the world.</span>
+				<div style={{display:'flex', justifyContent:'center', marginTop:-70, }}>
+					<span style={{color:'#1d5207', width:700, fontSize: 20, fontWeight:700,  textAlign: "center"}}>Agrodao fights climate change and deforestation through food transparency.</span>
 				</div>
 				<div>
 					<Button onClick={createUsers}>
 						Create users
 					</Button>
-					
-					<Button onClick={fetchGreeting}>
-						Fetch greet
-					</Button>
-					
-					<Button onClick={setGreeting} style={{marginLeft: 10}}>
-						Set greet
-					</Button>
-				</div>
-				<div>
-					<Input
-						style={{marginTop: 10, width:220}}
-						placeholder="set lock message"
-						onChange={(e) => setMessage(e.target.value)}
-						value={message}>
-					</Input>
 				</div>
 			</div>
 		</Loading>
