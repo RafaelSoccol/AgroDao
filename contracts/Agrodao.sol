@@ -20,7 +20,7 @@ uint age;
 bool exists;
 }
 
-uint global_product_id = 0;
+uint global_product_id = 1;
 
 // This declares a state variable that
 // stores a `User` struct for each possible address.
@@ -34,7 +34,7 @@ console.log("Deploying Agrodao contract!");
 }
 
 // product functions
-function createProduct(uint user_id, string calldata external_id, uint weight, uint age) public returns (string memory) {
+function createProduct(uint user_id, string calldata external_id, uint weight, uint age) public  returns (string memory) {
 if (users[user_id].exists) {
 Product memory product = Product(global_product_id, users[user_id], external_id, weight, age, true);
 products[global_product_id] = product;
@@ -47,7 +47,7 @@ return "user does not exist";
 
 // this method is used for transeferring ownership
 // only owner can access this
-function transferProduct(uint product_id, uint owner_user_id, uint next_owner_id) public returns(string memory, uint, uint) {
+function transferProduct(uint product_id, uint owner_user_id, uint next_owner_id) public  returns(string memory, uint, uint) {
 if (products[product_id].owner.id == users[owner_user_id].id) {
 if (users[next_owner_id].exists) {
 products[product_id].owner = users[next_owner_id];
@@ -62,15 +62,30 @@ return ("user does not own product", products[product_id].owner.id, users[owner_
 
 // user functions
 
-function createUser(uint id, string calldata mail, string calldata password) public returns(string memory) {
+function createUser(uint id, string calldata mail, string calldata password) public  returns(string memory) {
     if (!users[id].exists) {
         User memory user = User(id, mail, password, true);
         users[id] = user;
-        return "user created successfully";
+        return  "user created successfully";
     } else {
         return "user does not exist";
     }
 }
+
+    function createProductTeste(uint user_id, string calldata external_id, uint weight, uint age) public returns (uint) {
+        if (users[user_id].exists) {
+            Product memory product = Product(global_product_id, users[user_id], external_id, weight, age, true);
+            products[global_product_id] = product;
+            global_product_id += 1;
+            return  global_product_id -1;
+        } else {
+            return 0;
+        }
+    }
+
+    function getProductId() public view returns (int) {
+        return int(global_product_id -1);
+    }
 
 // function deleteUser()
 }

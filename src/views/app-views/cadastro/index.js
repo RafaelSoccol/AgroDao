@@ -32,6 +32,21 @@ const Cadastro = (props) => {
         await window.ethereum.request( {method: 'eth_requestAccounts'} );
     }
 
+    const getProduct = async () => {
+        if (typeof window.ethereum !== "undefined") {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, provider)
+
+            try {
+                const data = await contract.getProductId();
+                debugger
+                console.log("data: ", data);
+            } catch (error) {
+                console.log("Error: ", error);
+            }
+        }
+    };
+
     const createProduct = async (json) => {
         if (!json) return;
 
@@ -42,15 +57,24 @@ const Cadastro = (props) => {
             const signer = provider.getSigner();
 
             const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, signer)
-            const transaction = await contract.createProduct("teste");
+            const transaction = await contract.createProductTeste(123, "nome teste", 23, 150);
             // setMessage("");
             await transaction.wait();
+
+            getProduct()
         }
     }
 
     const onFinish = async (values) => {
+        values.name = "boi 1"
+        values.earning_number = 234
+        values.birth = "17/09/2021"
+        values.weight = 150
+        values.location = "fazenda teste"
+        values.observation = "observação teste"
+        
         createProduct(values)
-        console.log(values)
+       // console.log(values)
        // history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
     };
     
@@ -82,7 +106,7 @@ const Cadastro = (props) => {
                                 <Form.Item
                                     label="Earring Number"
                                     name="nome_cientifico"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
                             </Col>
@@ -93,7 +117,7 @@ const Cadastro = (props) => {
                                 <Form.Item
                                     label="Birth date"
                                     name="data_nascimento"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <DatePicker style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
@@ -111,7 +135,7 @@ const Cadastro = (props) => {
                                 <Form.Item
                                     label="Where the bovine is?"
                                     name="teste1"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
                             </Col>

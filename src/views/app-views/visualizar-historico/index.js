@@ -5,6 +5,10 @@ import { setIsLoading } from 'redux/actions/Gui';
 import {Button, Col, DatePicker, Form, Input, PageHeader, Row} from "antd";
 import {APP_PREFIX_PATH} from "../../../configs/AppConfig";
 import {useHistory, useParams} from "react-router-dom";
+import {ethers} from "ethers";
+import Agrodao from "../../../artifacts/contracts/Agrodao.sol/Agrodao.json";
+
+const agroDaoAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const VisualizarHistorico = (props) => {
     const { setIsLoading, isLoading } = props;
@@ -15,8 +19,25 @@ const VisualizarHistorico = (props) => {
 
     const [dadosById, setDadosById] = useState([]);
 
+    const requestAccount = async () => {
+        await window.ethereum.request( {method: 'eth_requestAccounts'} );
+    }
+
+    async function getProduct(id) {
+        if (typeof window.ethereum !== "undefined") {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, provider);
+            const prod = await contract.products(id);
+            console.log("product: ", prod);
+            let teste = prod.map( a => String(a))  
+            debugger
+        }
+    }
+
     const setarDadosById = () => {
 
+        getProduct(id);
+        
         // let dados = await consultorService.getById(id);
         
         let dados = {

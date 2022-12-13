@@ -2,9 +2,13 @@ import Loading from 'components/atom/Loading'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { setIsLoading } from 'redux/actions/Gui';
-import {Button, Col, DatePicker, Form, Input, PageHeader, Row} from "antd";
+import {Button, Col, DatePicker, Divider, Form, Input, InputNumber, PageHeader, Row} from "antd";
 import {APP_PREFIX_PATH} from "../../../configs/AppConfig";
 import {useHistory, useParams} from "react-router-dom";
+import {ethers} from "ethers";
+import Agrodao from "../../../artifacts/contracts/Agrodao.sol/Agrodao.json";
+
+const agroDaoAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const Editar = (props) => {
     const { setIsLoading, isLoading } = props;
@@ -26,10 +30,39 @@ const Editar = (props) => {
         testarLoading();
     }, []);
 
-    const onFinish = async (values) => {
+    const requestAccount = async () => {
+        await window.ethereum.request( {method: 'eth_requestAccounts'} );
+    }
 
-        history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
+    const onFinish = async (values) => {
+        // values.usuario_fonte
+        // values.usuario_recebe
+        // values.boi_id
+        if (typeof window.ethereum !== "undefined") {
+            await requestAccount();
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, signer)
+
+            try {
+                const data = await contract.transferProduct(values.boi_id, values.usuario_fonte, values.usuario_recebe);
+                console.log("data: ", data);
+                await getProduct(values.boi_id);
+            } catch (error) {
+                console.log("Error: ", error);
+            }
+        }
+       // history.push(`${APP_PREFIX_PATH}/lista-daninhas`) ;
     };
+    
+   const getProduct = async (id) => {
+        if (typeof window.ethereum !== "undefined") {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const contract = new ethers.Contract(agroDaoAddress, Agrodao.abi, provider);
+            const prod = await contract.products(id);
+            await  console.log("product: ", prod);
+        }
+    }
 
     return (
         <Loading isLoading={isLoading}>
@@ -53,7 +86,7 @@ const Editar = (props) => {
                                 <Form.Item
                                     label="Where the bovine is?"
                                     name="nome_cientifico"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
                             </Col>
@@ -61,7 +94,7 @@ const Editar = (props) => {
                                 <Form.Item
                                     label="Current weight (kg)"
                                     name="nome_cientifico"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <Input/>
                                 </Form.Item>
                             </Col>
@@ -72,16 +105,45 @@ const Editar = (props) => {
                                 <Form.Item
                                     label="Observation"
                                     name="nome_cientifico"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
-                                    <DatePicker style={{width:"100%"}}/>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
+                                    <Input style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     label="Date of slaughter"
                                     name="nome_cientifico"
-                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    rules={[{required: false, message: 'Esse campo é obrigatório'}]}>
                                     <DatePicker style={{width:"100%"}}/>
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        
+                        <Divider/>
+
+                        <Row gutter={16}>
+                            <Col xs={24} md={8}>
+                                <Form.Item
+                                    label="Usuario fonte"
+                                    name="usuario_fonte"
+                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    <InputNumber style={{width:"100%"}}/>
+                                </Form.Item>
+                            </Col>
+                            <Col xs={24} md={8}>
+                                <Form.Item
+                                    label="Usuario recebe"
+                                    name="usuario_recebe"
+                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    <InputNumber style={{width:"100%"}}/>
+                                </Form.Item>
+                            </Col>
+                            <Col xs={24} md={8}>
+                                <Form.Item
+                                    label="Boi"
+                                    name="boi_id"
+                                    rules={[{required: true, message: 'Esse campo é obrigatório'}]}>
+                                    <InputNumber style={{width:"100%"}}/>
                                 </Form.Item>
                             </Col>
                         </Row>

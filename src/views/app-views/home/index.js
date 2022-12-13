@@ -31,12 +31,10 @@ const Home = (props) => {
 			
 			try {
 				
-			 	let usuario1 = await  contract.createUser(123, "dscds", "dcsdc");
+				 const usuario1 = await  contract.createUser(123, "user1", "pass1");
+				 const usuario2 = await  contract.createUser(321, "user2", "pass2");
 				
-				let usuario2 = await  contract.createUser(321, "bnbjhb", "xsdxxd");
-
-				debugger
-				console.log("users: ", usuario1, usuario2);
+				console.log("users: ", usuario1);
 			} catch (error) {
 				console.log("Error: ", error);
 			}
